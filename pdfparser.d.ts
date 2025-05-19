@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EventEmitter } from "node:events";
-import { Transform, Readable, TransformOptions, TransformCallback } from "node:stream";
 import fs from "node:fs";
+import { Readable, Transform, TransformCallback, TransformOptions } from "node:stream";
 
 export declare class StringifyStream extends Transform {
 	constructor(options?: TransformOptions);
@@ -12,6 +12,8 @@ export declare class ParserStream{
 	static createContentStream(jsonObj): Readable
 	static createOutputStream(outputPath, resolve, reject): fs.WriteStream
 }
+
+export const PDFJS = typeof PDFJS;
 
 export declare class PDFParser extends EventEmitter{
 	static get ParserStream(): typeof ParserStream
