@@ -159,4 +159,4 @@ export declare interface Box {
 	style: number;
 }
 
-export default PDFParser;
+export = PDFParser;

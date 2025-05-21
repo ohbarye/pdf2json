@@ -1,21 +1,21 @@
-import fs from "fs";
-import nodeUtil from "util";
-import { readFile } from "fs/promises";
-import { EventEmitter } from "events";
 import { Buffer } from "buffer";
+import { EventEmitter } from "events";
+import fs from "fs";
+import { readFile } from "fs/promises";
+import nodeUtil from "util";
 
-import PDFJS from "./lib/pdf.js";
 import { ParserStream, StringifyStream } from "./lib/parserstream.js";
+import { PDFJS, PDFJSClass } from "./lib/pdf.js";
 import { kColors, kFontFaces, kFontStyles } from "./lib/pdfconst.js";
-import { pkInfo, _PARSER_SIG } from "./lib/pkinfo.js";
 import PDFUnit from "./lib/pdfunit.js";
+import { _PARSER_SIG, pkInfo } from "./lib/pkinfo.js";
 
 /**
  * Class representing a PDF Parser.
  * @class PDFParser
  * @extends EventEmitter
  */
-export default class PDFParser extends EventEmitter {
+class PDFParser extends EventEmitter {
 	/**
 	 * Static method to retrieve color dictionary.
 	 * @returns {object} Color dictionary
@@ -104,7 +104,7 @@ export default class PDFParser extends EventEmitter {
 		this.#data = null; //if file read success, data is PDF content; if failed, data is "err" object	        this.#processFieldInfoXML = false;
 		this.#processFieldInfoXML = false; //disable additional _fieldInfo.xml parsing and merging (do NOT set to true)
 
-		this.#PDFJS = new PDFJS(needRawText);
+		this.#PDFJS = new PDFJSClass(needRawText);
 		this.#password = password;
 	}
 
@@ -318,3 +318,6 @@ export default class PDFParser extends EventEmitter {
 		this.#PDFJS = null;
 	}
 }
+
+export { PDFJS, PDFParser };
+
